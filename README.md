@@ -1,0 +1,4 @@
+# surfOpt: Python framework for genetic algorithm testing
+Set of functions and classes to test genetic algorithms (GAs) when solving user provided optimization problems. The framework aims to provide different major families of GAs which are customizable with different combinations of algorithms for each of their steps (e.g. Selection, crossover, mutation, etc.). The goal is to facilitate the creation of different "flavors" of similar GAs and compare their performance at optimizing particular problems.
+
+For a usage demonstration, see the jupyter notebook `example.ipynb`. Specific documentation for each of the functions and classes can be found inside de `.py` source files.

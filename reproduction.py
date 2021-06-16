@@ -9,7 +9,7 @@ import random as rd
 # crossover in which case the offspring accepts the component from the mutated
 # individual in an initially randomly determined dimension of the offspring's solution
 # vector; afterwards, contiguous dimensions are visited and assigned in the same
-# manner in a circular way [3]. This code implements this procedure in a slightly
+# manner in a circular way. This code implements this procedure in a slightly
 # more optimized way than described. 
 def DERandOneExp(parent_indx, population, F, cprob, lls, uls):
   P = population.copy()

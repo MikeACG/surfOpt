@@ -3,32 +3,38 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
-# a DE/rand/1/exp GA
+# implements a differential evolution GA
 class diffEvolver:
     def __init__(self, ps, F, cp, nfe, rng = 123):
-        self.ps = ps
-        self.F = F
-        self.cp = cp
-        self.nfe = nfe
-        self.rng = rng
-        self.pop = []
-        self.evals = []
+        self.ps = ps # population size
+        self.F = F # scaling factor
+        self.cp = cp # crossover probability
+        self.nfe = nfe # number of function evaluations
+        self.rng = rng # random seed for reproducibility
+        self.pop = [] # keeps the population after evolution
+        self.evals = [] # keeps the evaluations of the population after evolution
     
+    # sets the function to initialize individuals
     def setPopulator(self, populator):
         self.populator = populator
     
+    # sets the DE reproduction method
     def setReproduction(self, reproduction):
         self.reproduction = reproduction
     
+    # sets the survival method after reproduction and before next iteration of evolution
     def setSurvival(self, survival):
         self.survival = survival
     
+    # sets the distance fucntion for survival calculation
     def setDistance(self, distance):
         self.distance = distance
     
+    # allows for changing the rng seed
     def setSeed(self, rng):
         self.rng = rng
     
+    # prints progress of evolution process
     def verbosity(self, ngen, nevals, population, evaluations):
         meanFit = sum(evaluations) / len(evaluations)
         print('GENERATION: ', str(ngen), ' / Fitness evaluations: ', nevals, '. Mean fitness is ', '{:.2f}'.format(meanFit), ", Showing top 10 individuals...", sep = '')
@@ -37,6 +43,7 @@ class diffEvolver:
             ind = ['{:.2f}'.format(d) for d in population[top[i]]]
             print("\t", "Fitness: ", '{:.2f}'.format(evaluations[top[i]]), " / Genotype: ", str(ind), sep = '')
 
+    # GA
     def evolve(self, surf):
         rd.seed(self.rng)
         pop = [self.populator(surf.dlims, surf.ulims) for i in range(self.ps)]
